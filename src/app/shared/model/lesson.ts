@@ -8,5 +8,27 @@ export class Lesson {
     public pro: boolean,
     public longDescription: string,
     public courseId: string,
-    public videoUrl: string) {}
+    public videoUrl: string) { }
+
+  get isBeginner() {
+    return this.tags && this.tags.includes('BEGINNER');
+  }
+
+  static fromJsonList(array: any): Lesson[] {
+    return array.map(Lesson.fromJson);
+  }
+
+  static fromJson({$key, description, duration,
+    url, tags, pro, longDescription, courseId, videoUrl}): Lesson {
+    return new Lesson(
+      $key,
+      description,
+      duration,
+      url,
+      tags,
+      pro,
+      longDescription,
+      courseId,
+      videoUrl);
+  }
 }
